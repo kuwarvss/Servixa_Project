@@ -1,0 +1,101 @@
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: 
+        /* linear-gradient(
+            rgba(0,0,0,0.55),
+            rgba(0,0,0,0.55)
+        ), */
+        url('../images/bg2.jpg');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+
+/* Login Card */
+.login-card {
+    width: 800px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    display: flex;
+    animation: fadIn 1s ease;
+}
+/* Left section: logo + brand */
+.login-left {
+    flex: 1;
+    background: linear-gradient(135deg, #57C785, #6a11cb, #2575fc, #57C785);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.login-left img {
+    widtg: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    object-fit: cover;
+    border: 2px solid white;
+}
+
+.login-left h2 {
+    font-weight: 700;
+}
+
+/* Right section: login form */
+.login-right {
+    flex: 1;
+    background: white;
+    padding: 50px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@keyframes fadein {
+    0%{opacity:0; transform: translateY(-20px);}
+    100% {opacity:1; transform: translateY(0);}
+}
+
+.form-control:focus {
+    box-shadow:none;
+    border-color: #6a11cb;
+
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #57C785, #6a11cb, #2575fc, #57C785);
+    border: none;
+}
+.btn-primary:hover {
+    background: #2575fc;
+}
+
+@media(max-width: 768px){
+    .login-card {
+        flex-direction: column;
+        width: 90%;
+
+    }
+    .login-left, .login-right {
+        flex: unset;
+
+    }
+    .login-left {
+        padding: 30px;
+    }
+    .login-right {
+        padding: 30px;
+    }
+}
