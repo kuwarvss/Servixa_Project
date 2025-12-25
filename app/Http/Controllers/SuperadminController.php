@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Admin;
+use Illuminate\Support\Facades\Hash;
 class SuperadminController extends Controller
 {
     public function showLoginForm()
@@ -72,30 +73,48 @@ class SuperadminController extends Controller
 
     public function superAdmin_create_admin_data_save(Request $request)
     {
-        // Check if superadmin is logged in
+        // Superadmin check
         if (!session('superadmin_logged_in')) {
             return redirect()->route('superadmin')->withErrors([
                 'mobile_no' => 'Please login to access this page.',
             ]);
         }
 
-        // Validate the incoming request data
         $request->validate([
-            'name'       => 'required|string|max:255',
-            'email'      => 'required|email|unique:admins,email',
-            'mobile_no'  => 'required|digits:10|unique:admins,mobile_no',
-            'password'   => 'required|string|min:6|confirmed',
+            'name'        => 'required|string|max:255',
+            'email'       => 'required|email|unique:admins,email',
+            'mobile_no'   => 'required|digits:10|unique:admins,mobile_no',
+            'password'    => 'required|string|min:6|confirmed',
+            'status'      => 'required|boolean',
+            'admin_image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'id_type'     => 'nullable|string|max:100',
+            'id_number'   => 'nullable|string|max:100',
+            'address'     => 'nullable|string|max:500',
         ]);
 
-        // Save the new admin data to the database
-        // Admin::create([
-        //     'name'      => $request->name,
-        //     'email'     => $request->email,
-        //     'mobile_no' => $request->mobile_no,
-        //     'password'  => Hash::make($request->password),
-        // ]);
+        // // Image Upload
+        $imagePath = null;
+        // if ($request->hasFile('admin_image')) {
+        //     $imagePath = $request->file('admin_image')
+        //                         ->store('admins', 'public');
+        // }
 
-        return redirect()->route('superadmin.create_admin')->with('status', 'New admin created successfully.');
+        // Save Admin
+        Admin::create([
+            'name'        => $request->name,
+            'email'       => $request->email,
+            'mobile_no'   => $request->mobile_no,
+            'password'    => Hash::make($request->password),
+            'status'      => $request->status,
+            'admin_image' => $imagePath,
+            'id_type'     => $request->id_type,
+            'id_number'   => $request->id_number,
+            'address'     => $request->address,
+        ]);
+
+        return redirect()
+            ->route('superadmin.create_admin')
+            ->with('status', 'New admin created successfully.');
     }
 
     public function superAdmin_manage_admin()
