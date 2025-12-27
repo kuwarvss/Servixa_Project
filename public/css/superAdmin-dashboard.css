@@ -1,0 +1,308 @@
+/* ================= BASE ================= */
+body {
+    background: #f5f7fb;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+}
+
+/* ================= TOP BAR (FIXED HEIGHT) ================= */
+.topbar-gradient {
+    height: 64px; /* 🔥 FIX */
+    background: linear-gradient(135deg,#57C785, #6a11cb, #2575fc, #57C785);
+    box-shadow: 0 8px 24px rgba(0,0,0,.14);
+    display: flex;
+    align-items: center;
+}
+
+/* ================= TOP NAVBAR ================= */
+
+/* .topbar-gradient {
+    background: linear-gradient(135deg,#57C785, #6a11cb, #2575fc, #57C785);
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+} */
+
+/* ================= LOGO ================= */
+
+.logo-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.28);
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+        0 0 0 2px rgba(255,255,255,.25),
+        0 6px 16px rgba(0,0,0,.35);
+}
+
+.logo-circle img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,.5));
+}
+
+.logo-text {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1;
+    text-shadow: 0 1px 6px rgba(0,0,0,.45);
+}
+
+/* ================= NAV ICONS ================= */
+
+.icon-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.22);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all .25s ease;
+}
+
+.icon-circle i {
+    font-size: 15px;
+}
+
+.icon-circle:hover {
+    background: rgba(255,255,255,.35);
+    transform: scale(1.08);
+}
+
+.icon-circle.logout {
+    background: rgba(239,68,68,.4);
+}
+
+/* ================= SUPER ADMIN TITLE ================= */
+
+.super-admin-title {
+    color: #e0e7ff;
+    font-size: 12px;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: .9;
+}
+
+
+/* ================= TABS ================= */
+.modern-tabs {
+    margin-top: 20px;
+}
+
+.modern-tabs .nav-link {
+    border-radius: 12px;
+    font-weight: 500;
+    color: #4b5563;
+    padding: 10px 18px;
+    margin-right: 8px;
+    transition: .2s;
+}
+
+.modern-tabs .nav-link.active {
+    background: linear-gradient(135deg,#57C785, #6a11cb, #2575fc, #57C785);
+    box-shadow: 0 6px 16px rgba(79,70,229,.35);
+}
+
+/* ================= ANALYTICS CARDS ================= */
+.stat-card {
+    color: #fff;
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0 12px 28px rgba(0,0,0,.18);
+    transition: transform .25s ease;
+    min-height: 110px;
+}
+
+.stat-card h6 {
+    font-size: 13px;
+    opacity: .9;
+}
+
+.stat-card h2 {
+    margin: 0;
+    font-weight: 600;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Gradients */
+.gradient-1 { background: linear-gradient(135deg, #f97316, #ec4899,#38bdf8); }
+.gradient-2 { background: linear-gradient(135deg, #38bdf8, #6366f1,#10b981); }
+.gradient-3 { background: linear-gradient(135deg, #10b981, #22c55e,#8b5cf6); }
+.gradient-4 { background: linear-gradient(135deg, #8b5cf6, #06b6d4,#f97316); }
+
+/* ================= GLASS CARDS ================= */
+.glass-card {
+    background: rgba(255,255,255,.75);
+    backdrop-filter: blur(14px);
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 10px 28px rgba(0,0,0,.08);
+
+}
+
+/* Chart Box */
+.chart-box {
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+/* ================= FORM ================= */
+.modern-input {
+    border-radius: 12px;
+    padding: 12px 14px;
+    border: 1px solid #e5e7eb;
+}
+
+.modern-input:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79,70,229,.2);
+}
+
+/* Button */
+.gradient-btn {
+    background: linear-gradient(135deg, #57C785, #6a11cb, #2575fc, #57C785);
+    color: #fff;
+    border: none;
+    padding: 11px 26px;
+    border-radius: 12px;
+    font-weight: 500;
+    transition: .25s;
+}
+
+.gradient-btn:hover {
+    opacity: .92;
+}
+
+/* ================= TABLE ================= */
+.modern-table th {
+    border: none;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.modern-table td {
+    border-color: #eef2ff;
+}
+
+/* Action Buttons */
+.action-btn {
+    border: none;
+    padding: 6px 10px;
+    border-radius: 8px;
+    color: #a18080;
+    transition: .2s;
+}
+
+.action-btn.edit {
+    background: #4f46e5;
+}
+
+.action-btn.delete {
+    background: #ef4444;
+}
+
+.action-btn:hover {
+    opacity: .85;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .logo-text {
+        display: none;
+    }
+}
+
+/* ================= ACTION DROPDOWN POPUP CARD ================= */
+
+.action-dropdown {
+    min-width: 230px;
+    padding: 8px;
+    border: none;
+    position: absolute;
+    z-index: 9999;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.18);
+    animation: popupFade .18s ease-out;
+}
+
+/* Dropdown item */
+.action-dropdown .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    color: #374151;
+    transition: all .2s ease;
+}
+
+/* Hover */
+.action-dropdown .dropdown-item:hover {
+    background: rgba(79,70,229,.08);
+    color: #4f46e5;
+}
+
+/* Icon */
+.action-dropdown .dropdown-item i {
+    width: 18px;
+    text-align: center;
+    color: #4f46e5;
+}
+
+/* Danger */
+.action-dropdown .dropdown-item.text-danger:hover {
+    background: rgba(239,68,68,.1);
+    color: #dc2626;
+}
+
+.action-dropdown .dropdown-item.text-danger i {
+    color: #dc2626;
+}
+
+/* Divider */
+.action-dropdown .dropdown-divider {
+    margin: 6px 0;
+    opacity: .08;
+}
+
+/* Popup animation */
+@keyframes popupFade {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.glass-card,
+.table-responsive {
+    overflow: visible !important;
+}
+
+td {
+    position: relative;
+}
+
+
+
