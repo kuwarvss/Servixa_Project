@@ -9,13 +9,32 @@ Route::get('/', function () {
 });
 
 //Superadmin routes
-Route::get('/superadmin', [SuperadminController::class, 'showLoginForm'])->name('superadmin');
-Route::post('/superadmin', [SuperadminController::class, 'superAdminLogin']);
-Route::get('/superadmin-dashboard', [SuperadminController::class, 'superAdminDashboard'])->name('superadmin.dashboard');
-Route::get('/superadmin-create_admin', [SuperadminController::class, 'superAdmin_create_admin'])->name('superadmin.create_admin');
-Route::post('/superadmin-create_admin', [SuperadminController::class, 'superAdmin_create_admin_data_save'])->name('superadmin.create_admin');
-Route::get('/superadmin-manage_admin', [SuperadminController::class, 'superAdmin_manage_admin'])->name('superadmin.manage_admin');
-Route::get('/superadmin-logout', [SuperadminController::class, 'superAdminLogout'])->name('superadmin.logout');
+Route::prefix('superadmin')->group(function () {
+
+    //  Login Routes (NO auth)
+    Route::get('/', [SuperadminController::class, 'showLoginForm'])
+        ->name('superadmin.login');
+
+    Route::post('/', [SuperadminController::class, 'superAdminLogin'])
+        ->name('superadmin.login.submit');
+
+    //  Protected Routes (login ke baad)
+    Route::get('/dashboard', [SuperadminController::class, 'superAdminDashboard'])
+        ->name('superadmin.dashboard');
+
+    Route::get('/create-admin', [SuperadminController::class, 'superAdmin_create_admin'])
+        ->name('superadmin.admin.create');
+
+    Route::post('/store-admin', [SuperadminController::class, 'superAdmin_create_admin_data_save'])
+        ->name('superadmin.admin.store');
+
+    Route::get('/manage-admins', [SuperadminController::class, 'superAdmin_manage_admin'])
+        ->name('superadmin.admin.manage');
+
+    Route::post('/logout', [SuperadminController::class, 'superAdminLogout'])
+        ->name('superadmin.logout');
+});
+
 
 
 

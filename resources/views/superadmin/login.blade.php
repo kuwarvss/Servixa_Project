@@ -46,7 +46,7 @@
             <!-- Right Section -->
             <div class="login-right">
                 <h3 class="mb-4">Super Admin Login</h3>
-                <form method="POST" action="{{ route('superadmin') }}">
+                <form method="POST" action="{{ route('superadmin.login') }}">
                     @csrf
                     <div class="mb-3">
                         <label for="mobile_no" class="form-label">Mobile Number</label>

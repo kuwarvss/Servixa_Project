@@ -1,57 +1,84 @@
-.custom-navbar {
-    background: linear-gradient(135deg, #0d6efd, #0a1a33,);
-    padding: 0.75rem 1.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+body {
+    background: #f5f7fb;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
 }
 
-.btn-logout {
-    background-color: #dc3545;
+.admin-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #111827;
     color: #fff;
-    border-radius: 25px;
-    padding: 0.4rem 1rem;
-    transition: all 0.3s ease;
+    padding: 12px 20px;
 }
 
-.btn-logout:hover {
-    background-color: #bb2d3b;
-    color: #fff;
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.nav-center h2 {
+    margin: 0;
+}
+.nav-right img {
+    height: 40px;
 }
 
-.btn-size {
-    font-size: 1.2rem;
+/* MENU BAR */
+.menu-bar {
+    display: flex;
+    gap: 20px;
+    background: #1f2937;
+    padding: 10px 20px;
+}
+
+/* DROPDOWN */
+.dropdown {
+    position: relative;
+}
+
+.dropbtn {
+    background: none;
+    color: white;
     border: none;
+    cursor: pointer;
+    font-size: 15px;
 }
 
-.main-content {
-    padding-top: 90px;
-}
-/* Light Theme */
-.light-theme {
-    background-color: #f8f9fa;
-    color:#212529;
-}
-/* Dark Theme */
-.dark-theme {
-    background-color: #121212;
-    color: #f1f1f1;
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: #fff;
+    min-width: 180px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 100;
 }
 
-.dark-theme .dropdown-menu {
-    background-color: #1e1e1e;
-}
-.dark-theme .dropdown-item {
-    color: #f1f1f1;
+.dropdown-content a,
+.logout-btn {
+    display: block;
+    padding: 10px;
+    color: #000;
+    text-decoration: none;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
 }
 
-.dark-theme .dropdown-item:hover {
-    background-color: #2c2c2c;
-    
+.dropdown-content a:hover,
+.logout-btn:hover {
+    background: #f3f4f6;
 }
 
-/* Responsive Adjustments */
-@media (max-length: 768px) {
-    .btn-logout {
-        padding: 0.35rem 0.75rem;
-        font-size: 1rem;
-    }
+.dropdown:hover .dropdown-content {
+    display: block;
 }
+
+.theme-icon {
+    cursor: pointer;
+}
+
+
