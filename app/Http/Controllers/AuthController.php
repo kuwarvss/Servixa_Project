@@ -22,63 +22,110 @@ class AuthController extends Controller
      * Handle the login request.
      */
     public function login(Request $request)
-    {
-        $credentials = $request->validate([
+    {   
+        $request->validate([
             'mobile_no' => 'required|digits_between:8,15',
-            'password'  => 'required|string|min:6',
+            'password' => 'required|string|min:6',
         ]);
 
-        // if (Auth::attempt($credentials)) {
-        //     $request->session()->regenerate();
+        if (
+            Auth::guard('admin')->attempt([
+                'mobile_no' => $request->mobile_no,
+                'password' => $request->password,
+            ])
+        ) {
+             
 
-        //     return redirect()->intended('/'); // Redirect to the intended page or home
-        // }
+            $request->session()->regenerate();
 
-        return back()->withErrors([
-            'mobile_no' => 'The provided credentials do not match our records.',
-        ]);
+            $admin = Auth::guard('admin')->user();
+          
+            if ($admin->status == 0) {
+                Auth::guard('admin')->logout();
+                return back()->withErrors(['mobile_no' => 'Account inactive']);
+            }else{
+
+            // if ($admin->force_password_change) {
+            //     return redirect()->route('admin.change.');
+            // }
+
+                return redirect()->route('admin.dashboard');
+            }
+        }
+
+        // return back()->withErrors([
+        //     'mobile_no' => 'Invalid login credentials',
+        // ]);
     }
 
-    /**
-     * Show the signup form.
-     */
-    public function showSignupForm()
-    {
-        return view('auth.signup');
-    }
 
-    /**
-     * Handle the signup request.
-     */
-    public function signup(Request $request)
-    {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
-
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-
-        Auth::login($user);
-
-        return redirect('/');
-    }
 
     /**
      * Handle the logout request.
      */
     public function logout(Request $request)
     {
-        Auth::logout();
+        Auth::guard('admin')->logout();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        // $request->session()->invalidate();
+        // $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public function adminDashboard()
+    {
+        return view('auth.dashboard');
+    }
+
+    // public function changepassworddata(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'current_password' => 'required|string',
+    //         'new_password' => 'required|string|min:6|confirmed',
+    //     ]);
+    //     dd(Auth::guard('admin')->check(), Auth::guard('admin')->user());
+    //     if ($validator->fails()) {
+    //         return redirect()->back()->withErrors($validator)->withInput();
+    //     }
+
+    //     $admin = Auth::guard('admin')->user();        
+    //     if (!Hash::check($request->current_password, $admin->password)) {
+    //         return redirect()->back()->withErrors(['current_password' => 'Current password is incorrect'])->withInput();
+    //     }
+
+    //     $admin->password = Hash::make($request->new_password);
+    //     // $admin->force_password_change = false; // Reset the flag
+    //     $admin->save();
+
+    //     return redirect()->back()->with('success', 'Password changed successfully');
+    // }
+    
+
+    public function changepassworddata(Request $request)
+    {   
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:6|confirmed',
+        ]);
+
+        $admin = Auth::guard('admin')->user();
+        if (!Hash::check($request->current_password, $admin->password)) {
+            return back()->withErrors(['current_password' => 'Current password is incorrect']);
+        }
+
+        $admin->password = Hash::make($request->new_password);
+        $admin->force_password_change = 0;
+        $admin->password_created_at = now();
+        $admin->save();
+
+        Auth::guard('admin')->login($admin);
+
+        // Regenerate session
+        $request->session()->regenerate();
+
+        return redirect()->route('admin.dashboard')->with('success', 'Password changed successfully');
+        // return back()->with('success', 'Password changed successfully');
+        // return redirect()->route('admin.dashboard');
     }
 }

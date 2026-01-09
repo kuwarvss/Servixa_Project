@@ -46,9 +46,9 @@
                 </div>
             </form>
 
-            <p class="text-center mt-3">
+            {{-- <p class="text-center mt-3">
                 Don't have an account? <a href="{{ route('signup') }}">Sign Up</a>
-            </p>
+            </p> --}}
         </div>
     </div>
 
